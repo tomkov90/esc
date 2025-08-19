@@ -241,6 +241,7 @@
         const y = new Date().getFullYear();
         $("#from").value = y + "-01";
         $("#to").value   = (y+1) + "-01";
+        loadFromSheets(); // auto-load after PIN
       } else { alert("Nieprawidłowy PIN."); }
     });
     $("#thisYearBtn").addEventListener("click", ()=>{ const y = new Date().getFullYear(); $("#from").value = y+"-01"; $("#to").value = (y+1)+"-01"; });
@@ -259,11 +260,12 @@
         if(to)   url.searchParams.set("to", to);
         const res = await fetch(url.toString(), { method:"GET" });
         let entries = await res.json();
+        if(!Array.isArray(entries)){ alert("Błąd formatu danych z Arkusza."); return; }
         if(nameFrag) entries = entries.filter(e => (e.name||"").toLowerCase().includes(nameFrag));
         if(projFrag) entries = entries.filter(e => (e.project||"").toLowerCase().includes(projFrag));
         renderTables(entries);
       }catch(err){
-        console.error(err); alert("Nie udało się pobrać danych.");
+        console.error(err); alert("Nie udało się pobrać danych."); 
       }
     }
 
@@ -284,7 +286,7 @@
       entries.forEach(e=> sumMap.set(e.name, (sumMap.get(e.name)||0) + Number(e.hours||0)));
       $("#summaryBody").innerHTML = [...sumMap.entries()]
         .sort((a,b)=> a[0].localeCompare(b[0],'pl'))
-        .map(([name,total])=> `<tr><td>{escapeHtml(name)}</td><td class="right">{total.toFixed(2)}</td></tr>`)
+        .map(([name,total])=> `<tr><td>${escapeHtml(name)}</td><td class="right">${total.toFixed(2)}</td></tr>`)
         .join("") || `<tr><td colspan="2" class="muted">Brak danych.</td></tr>`;
 
       $("#detailsBody").innerHTML = entries.map(e=>`
@@ -297,7 +299,8 @@
         </tr>`).join("") || `<tr><td colspan="5" class="muted">Brak wpisów.</td></tr>`;
     }
 
-    function escapeHtml(s){ return String(s).replace(/[&<>"']/g, m=>({ "&":"&amp;","<":"&lt;","&gt;":"&gt;","\"":"&quot;","'":"&#039;" }[m])); }
+    function escapeHtml(s){ return String(s).replace(/[&<>"']/g, m=>({ "&":"&amp;","<":"&lt;","&gt;":"&gt;",""":"&quot;","'":"&#039;" }[m])); }
   </script>
 </body>
 </html>
+
