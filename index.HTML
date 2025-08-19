@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <title>ELECTRIC SOLUTIONS CONTRACTOR — ewidencja czasu pracy</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    /* === Dark electric theme === */
+    :root {
+      --bg:#0b1020;
+      --bg-2:#0f172a;
+      --card:#0f1a33;
+      --line:#1c2847;
+      --muted:#93a4c6;
+      --accent:#22c55e;   /* neon green */
+      --accent-2:#facc15; /* electric yellow */
+      --danger:#ef4444;
+      --text:#e6ecff;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background: radial-gradient(1200px 500px at 50% -120px, rgba(34,197,94,0.10), transparent),
+                  radial-gradient(800px 400px at 10% 10%, rgba(250,204,21,0.08), transparent),
+                  var(--bg);
+      color:var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif;
+    }
+    a{color:inherit}
+
+    /* Header */
+    header{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:14px 16px;border-bottom:1px solid var(--line);
+      position:sticky;top:0;background:rgba(11,16,32,.7);backdrop-filter: blur(8px);
+    }
+    .brand{display:flex;gap:10px;align-items:center}
+    .brand svg{width:28px;height:28px;flex:0 0 28px;filter:drop-shadow(0 0 6px rgba(250,204,21,.6))}
+    .brand-name{font-weight:700;letter-spacing:.5px}
+    .row{display:flex;gap:10px;flex-wrap:wrap}
+    .btn{padding:8px 12px;border-radius:10px;border:1px solid var(--line);background:#0c1731;color:var(--text)}
+    .btn.ghost{background:#0c1731;border-color:#203055}
+    .btn.accent{background:var(--accent);border-color:transparent;color:#062b17;font-weight:700}
+    .btn.warn{background:var(--danger);border-color:transparent;color:#fff}
+
+    /* Hero */
+    .hero{
+      position:relative;
+      isolation:isolate;
+      padding:56px 16px 32px;
+      border-bottom:1px solid var(--line);
+      background:
+        radial-gradient(1000px 300px at 50% 0%, rgba(34,197,94,0.12), transparent 60%),
+        linear-gradient(180deg, rgba(250,204,21,0.05), transparent 30%);
+      text-align:center;
+    }
+    .hero h1{
+      margin:0;
+      font-size: clamp(28px, 5vw, 44px);
+      letter-spacing:1px;
+      text-transform:uppercase;
+      line-height:1.2;
+      background: linear-gradient(90deg, #e8ffe0, #b7ffcf 30%, #fef3c7 70%, #fff);
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+      text-shadow:0 0 10px rgba(34,197,94,.25);
+    }
+    .hero h2{
+      margin:10px 0 0;
+      font-size: clamp(14px, 2.8vw, 18px);
+      color:var(--muted);
+      letter-spacing:.3px;
+    }
+    .hero .pulse{
+      position:absolute;inset:0;z-index:-1;
+      background:
+        radial-gradient(400px 200px at 65% 40%, rgba(250,204,21,.08), transparent),
+        radial-gradient(500px 260px at 35% 30%, rgba(34,197,94,.10), transparent);
+      animation:pulse 6s infinite ease-in-out;
+      opacity:.8;
+    }
+    @keyframes pulse{
+      0%,100%{transform:scale(1)}
+      50%{transform:scale(1.03)}
+    }
+
+    main{max-width:1050px;margin:20px auto;padding:0 16px}
+
+    /* Tabs */
+    .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
+    .tab{padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:#0c1731;cursor:pointer}
+    .tab.active{outline:2px solid #2a3c6b;box-shadow:0 0 0 2px rgba(34,197,94,.2) inset}
+
+    /* Cards & inputs */
+    .card{border:1px solid var(--line);background:var(--card);padding:16px;border-radius:14px;box-shadow: 0 10px 30px rgba(0,0,0,.25)}
+    .grid{display:grid;gap:12px}
+    @media(min-width:720px){ .grid-2{grid-template-columns:1fr 1fr} .grid-3{grid-template-columns:1fr 1fr 1fr} }
+    label{display:block;margin:4px 0 6px;color:#b9c7e6}
+    input, select{width:100%;padding:12px;border-radius:12px;border:1px solid #25365f;background:#0a1530;color:var(--text)}
+    input[type="month"]{padding:10px 12px}
+    table{width:100%;border-collapse:collapse;margin-top:8px}
+    th,td{padding:10px;border-bottom:1px solid #22355c;text-align:left}
+    th{background:#0a1530;color:#cfe0ff;position:sticky;top:56px;z-index:1}
+    .right{text-align:right}
+    .ok{background:#072a16;border:1px solid #14532d;color:#86efac;padding:10px 12px;border-radius:10px;margin-bottom:12px;box-shadow:0 0 12px rgba(34,197,94,.15)}
+    .hidden{display:none}
+
+    /* Subtle electric borders */
+    .card{
+      border-image: linear-gradient(90deg, rgba(34,197,94,.45), rgba(250,204,21,.35)) 1;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <!-- Lightning bolt logo -->
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M13 2L4 14h7l-2 8 11-14h-7l2-6z" fill="url(#g)" />
+        <defs>
+          <linearGradient id="g" x1="4" y1="2" x2="20" y2="22" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#facc15"/><stop offset=".5" stop-color="#a3e635"/><stop offset="1" stop-color="#22c55e"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <div class="brand-name">Electric Solutions Contractor</div>
+    </div>
+    <div class="row">
+      <button id="exportBtn" class="btn ghost">Eksport CSV</button>
+    </div>
+  </header>
+
+  <!-- HERO with big central title -->
+  <section class="hero">
+    <div class="pulse"></div>
+    <h1>ELECTRIC SOLUTIONS CONTRACTOR</h1>
+    <h2>ewidencja czasu pracy</h2>
+  </section>
+
+  <main>
+    <div class="tabs">
+      <button class="tab active" data-tab="form">📝 Formularz</button>
+      <button class="tab" data-tab="admin">📊 Zestawienie (PIN)</button>
+    </div>
+
+    <!-- FORM -->
+    <section id="tab-form" class="card" style="margin-top:12px">
+      <div id="msg" class="ok hidden"></div>
+      <div class="grid grid-3">
+        <div>
+          <label>Imię i nazwisko (wpisz ręcznie)</label>
+          <input id="name" placeholder="np. Jan Kowalski" required>
+        </div>
+        <div>
+          <label>Miesiąc (YYYY-MM)</label>
+          <input id="period" type="month" required>
+        </div>
+        <div>
+          <label>Godziny (łącznie w miesiącu)</label>
+          <input id="hours" type="number" step="0.01" min="0" placeholder="np. 168" required>
+        </div>
+      </div>
+      <div class="grid grid-2" style="margin-top:12px">
+        <div>
+          <label>Projekt (opcjonalnie)</label>
+          <input id="project" placeholder="np. Szkoła / Hala A">
+        </div>
+        <div>
+          <label>Opis (opcjonalnie)</label>
+          <input id="note" placeholder="np. montaże, okablowanie, testy">
+        </div>
+      </div>
+      <div class="row" style="margin-top:16px">
+        <button id="saveBtn" class="btn accent">Zapisz / nadpisz (1 wpis / miesiąc)</button>
+      </div>
+    </section>
+
+    <!-- ADMIN -->
+    <section id="tab-admin" class="card hidden" style="margin-top:12px">
+      <div id="pinWrap" class="grid grid-3">
+        <div>
+          <label>PIN do panelu</label>
+          <input id="pin" placeholder="Wpisz PIN" type="password">
+        </div>
+        <div class="row" style="align-items:end">
+          <button id="pinBtn" class="btn accent">Wejdź</button>
+        </div>
+      </div>
+
+      <div id="adminWrap" class="hidden">
+        <div class="grid grid-3">
+          <div>
+            <label>Od (YYYY-MM)</label>
+            <input id="from" type="month">
+          </div>
+          <div>
+            <label>Do (YYYY-MM)</label>
+            <input id="to" type="month">
+          </div>
+          <div>
+            <label>Filtr: nazwisko zawiera</label>
+            <input id="filterName" placeholder="np. Kowal">
+          </div>
+        </div>
+        <div class="grid grid-2" style="margin-top:12px">
+          <div>
+            <label>Filtr: projekt zawiera</label>
+            <input id="filterProject" placeholder="np. Hala">
+          </div>
+          <div class="row" style="align-items:end;justify-content:flex-end">
+            <button id="refreshBtn" class="btn ghost">Pobierz z Arkusza</button>
+            <button id="thisYearBtn" class="btn ghost">Bieżący rok</button>
+          </div>
+        </div>
+
+        <h3 style="margin:18px 0 8px">Suma godzin per pracownik (w zakresie)</h3>
+        <table>
+          <thead>
+            <tr><th>Imię i nazwisko</th><th class="right">Godziny (suma)</th></tr>
+          </thead>
+          <tbody id="summaryBody"></tbody>
+        </table>
+
+        <h3 style="margin:18px 0 8px">Szczegóły wpisów</h3>
+        <table>
+          <thead>
+            <tr><th>Miesiąc</th><th>Pracownik</th><th class="right">Godziny</th><th>Projekt</th><th>Opis</th></tr>
+          </thead>
+          <tbody id="detailsBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // === SETTINGS ===
+    const ADMIN_PIN   = "1234"; // zmień na swój
+    const DEPLOY_URL  = "https://script.google.com/macros/s/AKfycbxbP4em5FYTczeCq6zUbr00yMSQbM1YqaiRSzscsDaLaenJ8VlH3ArskVQGYkbRZ_1u/exec";
+
+    // Helpers
+    const $ = sel => document.querySelector(sel);
+    const now = new Date();
+    const currentMonth = () => now.toISOString().slice(0,7);
+
+    function showMsg(text){
+      const box = $("#msg"); box.textContent = text;
+      box.classList.remove("hidden"); setTimeout(()=>box.classList.add("hidden"), 2500);
+    }
+    function switchTab(id){
+      document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active", t.dataset.tab===id));
+      document.querySelectorAll("section[id^='tab-']").forEach(s=>s.classList.add("hidden"));
+      $("#tab-"+id).classList.remove("hidden");
+    }
+
+    // Init
+    document.querySelectorAll(".tab").forEach(btn=> btn.addEventListener("click", ()=>switchTab(btn.dataset.tab)));
+    $("#period").value = currentMonth();
+
+    // Save monthly entry
+    $("#saveBtn").addEventListener("click", async ()=>{
+      const name   = $("#name").value.trim();
+      const period = $("#period").value;      // YYYY-MM
+      const hours  = parseFloat($("#hours").value);
+      const project= $("#project").value.trim();
+      const note   = $("#note").value.trim();
+      if(!name){ alert("Podaj imię i nazwisko."); return; }
+      if(!period){ alert("Wybierz miesiąc."); return; }
+      if(isNaN(hours) || hours < 0){ alert("Podaj poprawną liczbę godzin (>=0)."); return; }
+      try{
+        const res = await fetch(DEPLOY_URL + "?action=entry", {
+          method:"POST", headers: {"Content-Type":"application/json"},
+          body: JSON.stringify({ name, period, hours: Math.round(hours*100)/100, project, note })
+        });
+        const data = await res.json();
+        if(data && data.ok){ showMsg("Zapisano / zaktualizowano wpis miesięczny."); $("#hours").value = ""; $("#note").value  = ""; }
+        else{ alert("Błąd zapisu."); }
+      }catch(err){
+        console.error(err); alert("Nie udało się połączyć z Web App (sprawdź adres i uprawnienia).");
+      }
+    });
+
+    // Admin PIN
+    $("#pinBtn").addEventListener("click", ()=>{
+      if($("#pin").value === ADMIN_PIN){
+        $("#pinWrap").classList.add("hidden");
+        $("#adminWrap").classList.remove("hidden");
+        const y = new Date().getFullYear();
+        $("#from").value = y + "-01";
+        $("#to").value   = (y+1) + "-01";
+      } else { alert("Nieprawidłowy PIN."); }
+    });
+    $("#thisYearBtn").addEventListener("click", ()=>{ const y = new Date().getFullYear(); $("#from").value = y+"-01"; $("#to").value = (y+1)+"-01"; });
+
+    $("#refreshBtn").addEventListener("click", loadFromSheets);
+    $("#exportBtn").addEventListener("click", exportFromSheets);
+
+    async function loadFromSheets(){
+      const from = $("#from").value || "";
+      const to   = $("#to").value   || "";
+      const nameFrag = ($("#filterName").value || "").toLowerCase();
+      const projFrag = ($("#filterProject").value || "").toLowerCase();
+      try{
+        const url = new URL(DEPLOY_URL);
+        if(from) url.searchParams.set("from", from);
+        if(to)   url.searchParams.set("to", to);
+        const res = await fetch(url.toString(), { method:"GET" });
+        let entries = await res.json(); // [{name, period, hours, project, note}]
+        if(nameFrag) entries = entries.filter(e => (e.name||"").toLowerCase().includes(nameFrag));
+        if(projFrag) entries = entries.filter(e => (e.project||"").toLowerCase().includes(projFrag));
+        renderTables(entries);
+      }catch(err){
+        console.error(err); alert("Nie udało się pobrać danych.");
+      }
+    }
+
+    async function exportFromSheets(){
+      try{
+        const url = new URL(DEPLOY_URL); url.searchParams.set("export","csv");
+        const res = await fetch(url.toString()); const blob = await res.blob();
+        const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
+        a.download = "ewidencja_godzin_miesieczna.csv"; a.click(); URL.revokeObjectURL(a.href);
+      }catch(err){
+        console.error(err); alert("Nie udało się wyeksportować CSV.");
+      }
+    }
+
+    function renderTables(entries){
+      entries.sort((a,b)=> (a.period<b.period?1:-1) || a.name.localeCompare(b.name,'pl'));
+      const sumMap = new Map();
+      entries.forEach(e=> sumMap.set(e.name, (sumMap.get(e.name)||0) + Number(e.hours||0)));
+      $("#summaryBody").innerHTML = [...sumMap.entries()]
+        .sort((a,b)=> a[0].localeCompare(b[0],'pl'))
+        .map(([name,total])=> `<tr><td>{escapeHtml(name)}</td><td class="right">{total.toFixed(2)}</td></tr>`)
+        .join("") || `<tr><td colspan="2" class="muted">Brak danych.</td></tr>`;
+
+      $("#detailsBody").innerHTML = entries.map(e=>`
+        <tr>
+          <td>${e.period}</td>
+          <td>${escapeHtml(e.name)}</td>
+          <td class="right">${Number(e.hours||0).toFixed(2)}</td>
+          <td>${escapeHtml(e.project||"")}</td>
+          <td>${escapeHtml(e.note||"")}</td>
+        </tr>`).join("") || `<tr><td colspan="5" class="muted">Brak wpisów.</td></tr>`;
+    }
+
+    function escapeHtml(s){ return String(s).replace(/[&<>"']/g, m=>({ "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;" }[m])); }
+  </script>
+</body>
+</html>
