@@ -6,61 +6,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     :root {
-      --bg:#0b1020;
-      --card:#0f1a33;
-      --line:#1c2847;
-      --muted:#93a4c6;
-      --accent:#22c55e;
-      --accent2:#facc15;
-      --danger:#ef4444;
-      --text:#e6ecff;
+      --bg:#0b1020; --card:#0f1a33; --line:#1c2847; --muted:#93a4c6;
+      --accent:#22c55e; --accent2:#facc15; --danger:#ef4444; --text:#e6ecff;
     }
-    *{box-sizing:border-box}
-    html,body{height:100%}
+    *{box-sizing:border-box} html,body{height:100%}
     body{
-      margin:0;
-      background: radial-gradient(1200px 500px at 50% -120px, rgba(34,197,94,0.10), transparent),
-                  radial-gradient(800px 400px at 10% 10%, rgba(250,204,21,0.08), transparent),
-                  #0b1020;
-      color:var(--text);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif;
+      margin:0;background: radial-gradient(1200px 500px at 50% -120px, rgba(34,197,94,.10), transparent),
+      radial-gradient(800px 400px at 10% 10%, rgba(250,204,21,.08), transparent),#0b1020;
+      color:var(--text);font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif;
     }
-    header{
-      display:flex;align-items:center;justify-content:space-between;
-      padding:14px 16px;border-bottom:1px solid var(--line);
-      position:sticky;top:0;background:rgba(11,16,32,.7);backdrop-filter: blur(8px);
-    }
+    header{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--line);
+      position:sticky;top:0;background:rgba(11,16,32,.7);backdrop-filter: blur(8px);}
     .brand{display:flex;gap:10px;align-items:center}
-    .brand svg{width:28px;height:28px;flex:0 0 28px;filter:drop-shadow(0 0 6px rgba(250,204,21,.6))}
+    .brand svg{width:28px;height:28px;filter:drop-shadow(0 0 6px rgba(250,204,21,.6))}
     .brand-name{font-weight:700;letter-spacing:.5px}
     .row{display:flex;gap:10px;flex-wrap:wrap}
-    .btn{padding:8px 12px;border-radius:10px;border:1px solid var(--line);background:#0c1731;color:var(--text)}
+    .btn{padding:8px 12px;border-radius:10px;border:1px solid var(--line);background:#0c1731;color:var(--text);cursor:pointer}
     .btn.ghost{background:#0c1731;border-color:#203055}
     .btn.accent{background:var(--accent);border-color:transparent;color:#062b17;font-weight:700}
-    .btn.warn{background:var(--danger);border-color:transparent;color:#fff}
-
-    .hero{
-      position:relative; isolation:isolate; padding:56px 16px 32px;
-      border-bottom:1px solid var(--line);
-      background: radial-gradient(1000px 300px at 50% 0%, rgba(34,197,94,0.12), transparent 60%),
-                  linear-gradient(180deg, rgba(250,204,21,0.05), transparent 30%);
-      text-align:center;
-    }
-    .hero h1{
-      margin:0; font-size: clamp(28px, 5vw, 44px); letter-spacing:1px; text-transform:uppercase; line-height:1.2;
+    .hero{position:relative;isolation:isolate;padding:56px 16px 32px;border-bottom:1px solid var(--line);
+      background: radial-gradient(1000px 300px at 50% 0%, rgba(34,197,94,.12), transparent 60%),
+      linear-gradient(180deg, rgba(250,204,21,.05), transparent 30%);text-align:center;}
+    .hero h1{margin:0;font-size: clamp(28px,5vw,44px);letter-spacing:1px;text-transform:uppercase;line-height:1.2;
       background: linear-gradient(90deg, #e8ffe0, #b7ffcf 30%, #fef3c7 70%, #fff);
-      -webkit-background-clip:text;background-clip:text;color:transparent;
-      text-shadow:0 0 10px rgba(34,197,94,.25);
-    }
-    .hero h2{ margin:10px 0 0; font-size: clamp(14px, 2.8vw, 18px); color:var(--muted); letter-spacing:.3px; }
-
+      -webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 0 10px rgba(34,197,94,.25);}
+    .hero h2{margin:10px 0 0;font-size: clamp(14px,2.8vw,18px);color:var(--muted);}
     main{max-width:1050px;margin:20px auto;padding:0 16px}
     .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
     .tab{padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:#0c1731;cursor:pointer}
     .tab.active{outline:2px solid #2a3c6b;box-shadow:0 0 0 2px rgba(34,197,94,.2) inset}
-
-    .card{border:1px solid var(--line);background:var(--card);padding:16px;border-radius:14px;box-shadow: 0 10px 30px rgba(0,0,0,.25);
-           border-image: linear-gradient(90deg, rgba(34,197,94,.45), rgba(250,204,21,.35)) 1;}
+    .card{border:1px solid var(--line);background:var(--card);padding:16px;border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.25);
+      border-image: linear-gradient(90deg, rgba(34,197,94,.45), rgba(250,204,21,.35)) 1;}
     .grid{display:grid;gap:12px}
     @media(min-width:720px){ .grid-2{grid-template-columns:1fr 1fr} .grid-3{grid-template-columns:1fr 1fr 1fr} }
     label{display:block;margin:4px 0 6px;color:#b9c7e6}
@@ -69,8 +45,7 @@
     table{width:100%;border-collapse:collapse;margin-top:8px}
     th,td{padding:10px;border-bottom:1px solid #22355c;text-align:left}
     th{background:#0a1530;color:#cfe0ff;position:sticky;top:56px;z-index:1}
-    .right{text-align:right}
-    .ok{background:#072a16;border:1px solid #14532d;color:#86efac;padding:10px 12px;border-radius:10px;margin-bottom:12px;box-shadow:0 0 12px rgba(34,197,94,.15)}
+    .right{text-align:right} .ok{background:#072a16;border:1px solid #14532d;color:#86efac;padding:10px 12px;border-radius:10px;margin-bottom:12px;box-shadow:0 0 12px rgba(34,197,94,.15)}
     .hidden{display:none}
   </style>
 </head>
@@ -88,7 +63,7 @@
       <div class="brand-name">Electric Solutions Contractor</div>
     </div>
     <div class="row">
-      <button id="exportBtn" class="btn ghost">Eksport CSV</button>
+      <button id="exportBtn" class="btn ghost" type="button">Eksport CSV</button>
     </div>
   </header>
 
@@ -99,8 +74,8 @@
 
   <main>
     <div class="tabs">
-      <button class="tab active" data-tab="form">📝 Formularz</button>
-      <button class="tab" data-tab="admin">📊 Zestawienie (PIN)</button>
+      <button class="tab active" data-tab="form" type="button">📝 Formularz</button>
+      <button class="tab" data-tab="admin" type="button">📊 Zestawienie (PIN)</button>
     </div>
 
     <section id="tab-form" class="card" style="margin-top:12px">
@@ -130,7 +105,7 @@
         </div>
       </div>
       <div class="row" style="margin-top:16px">
-        <button id="saveBtn" class="btn accent">Zapisz / nadpisz (1 wpis / miesiąc)</button>
+        <button id="saveBtn" class="btn accent" type="button">Zapisz / nadpisz (1 wpis / miesiąc)</button>
       </div>
     </section>
 
@@ -141,7 +116,7 @@
           <input id="pin" placeholder="Wpisz PIN" type="password">
         </div>
         <div class="row" style="align-items:end">
-          <button id="pinBtn" class="btn accent">Wejdź</button>
+          <button id="pinBtn" class="btn accent" type="button">Wejdź</button>
         </div>
       </div>
 
@@ -166,8 +141,8 @@
             <input id="filterProject" placeholder="np. Hala">
           </div>
           <div class="row" style="align-items:end;justify-content:flex-end">
-            <button id="refreshBtn" class="btn ghost">Pobierz z Arkusza</button>
-            <button id="thisYearBtn" class="btn ghost">Bieżący rok</button>
+            <button id="refreshBtn" class="btn ghost" type="button">Pobierz z Arkusza</button>
+            <button id="thisYearBtn" class="btn ghost" type="button">Bieżący rok</button>
           </div>
         </div>
 
@@ -208,10 +183,11 @@
       $("#tab-"+id).classList.remove("hidden");
     }
 
+    // Tabs init
     document.querySelectorAll(".tab").forEach(btn=> btn.addEventListener("click", ()=>switchTab(btn.dataset.tab)));
     $("#period").value = currentMonth();
 
-    // POST without Content-Type header to avoid preflight/CORS issues with Apps Script
+    // Save monthly entry (POST bez Content-Type dla braku preflightu)
     $("#saveBtn").addEventListener("click", async ()=>{
       const name   = $("#name").value.trim();
       const period = $("#period").value;
@@ -234,18 +210,26 @@
       }
     });
 
+    // Admin logic
     $("#pinBtn").addEventListener("click", ()=>{
-      if($("#pin").value === ADMIN_PIN){
+      const val = $("#pin").value;
+      if(val === ADMIN_PIN){
         $("#pinWrap").classList.add("hidden");
         $("#adminWrap").classList.remove("hidden");
         const y = new Date().getFullYear();
         $("#from").value = y + "-01";
         $("#to").value   = (y+1) + "-01";
-        loadFromSheets(); // auto-load after PIN
-      } else { alert("Nieprawidłowy PIN."); }
+        // auto-load after PIN success
+        loadFromSheets();
+      } else {
+        alert("Nieprawidłowy PIN.");
+      }
     });
-    $("#thisYearBtn").addEventListener("click", ()=>{ const y = new Date().getFullYear(); $("#from").value = y+"-01"; $("#to").value = (y+1)+"-01"; });
-
+    $("#thisYearBtn").addEventListener("click", ()=>{
+      const y = new Date().getFullYear();
+      $("#from").value = y + "-01";
+      $("#to").value   = (y+1) + "-01";
+    });
     $("#refreshBtn").addEventListener("click", loadFromSheets);
     $("#exportBtn").addEventListener("click", exportFromSheets);
 
@@ -260,12 +244,11 @@
         if(to)   url.searchParams.set("to", to);
         const res = await fetch(url.toString(), { method:"GET" });
         let entries = await res.json();
-        if(!Array.isArray(entries)){ alert("Błąd formatu danych z Arkusza."); return; }
         if(nameFrag) entries = entries.filter(e => (e.name||"").toLowerCase().includes(nameFrag));
         if(projFrag) entries = entries.filter(e => (e.project||"").toLowerCase().includes(projFrag));
         renderTables(entries);
       }catch(err){
-        console.error(err); alert("Nie udało się pobrać danych."); 
+        console.error(err); alert("Nie udało się pobrać danych (sprawdź URL Web App i dostęp Anyone).");
       }
     }
 
@@ -281,14 +264,17 @@
     }
 
     function renderTables(entries){
+      // sort newest period first, then name
       entries.sort((a,b)=> (a.period<b.period?1:-1) || a.name.localeCompare(b.name,'pl'));
+      // summary
       const sumMap = new Map();
-      entries.forEach(e=> sumMap.set(e.name, (sumMap.get(e.name)||0) + Number(e.hours||0)));
+      for(const e of entries){ sumMap.set(e.name, (sumMap.get(e.name)||0) + Number(e.hours||0)); }
       $("#summaryBody").innerHTML = [...sumMap.entries()]
         .sort((a,b)=> a[0].localeCompare(b[0],'pl'))
         .map(([name,total])=> `<tr><td>${escapeHtml(name)}</td><td class="right">${total.toFixed(2)}</td></tr>`)
         .join("") || `<tr><td colspan="2" class="muted">Brak danych.</td></tr>`;
 
+      // details
       $("#detailsBody").innerHTML = entries.map(e=>`
         <tr>
           <td>${e.period}</td>
@@ -299,8 +285,7 @@
         </tr>`).join("") || `<tr><td colspan="5" class="muted">Brak wpisów.</td></tr>`;
     }
 
-    function escapeHtml(s){ return String(s).replace(/[&<>"']/g, m=>({ "&":"&amp;","<":"&lt;","&gt;":"&gt;",""":"&quot;","'":"&#039;" }[m])); }
+    function escapeHtml(s){ return String(s).replace(/[&<>"']/g, m=>({ "&":"&amp;","<":"&lt;","&gt;":"&gt;","\"":"&quot;","'":"&#039;" }[m])); }
   </script>
 </body>
 </html>
-
